@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>
-			{% block title %}Welcome!
+			{% block title %}Conservatoire
 			{% endblock %}
 		</title>
 		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
@@ -30,13 +30,19 @@
 				<div class="collapse navbar-collapse" id="navbarCollapse">
 					<ul class="navbar-nav me-auto mb-2 mb-md-0">
 						<li class="nav-item">
-							<a class="nav-link active" aria-current="page" href="#">Home</a>
+							<a class="nav-link active" aria-current="page" href="{{ path('home') }}">Accueil</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#">Link</a>
+							<a class="nav-link active" aria-current="page" href="#">Calendrier</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link disabled">Disabled</a>
+							<a class="nav-link active" aria-current="page" href="#">Fiches</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link active" aria-current="page" href="#">Profs</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link active" aria-current="page" href="#">Eleves</a>
 						</li>
 					</ul>
 					<form class="d-flex" role="search">
@@ -49,7 +55,8 @@
 	</header>
 
 	<body>
-		{% block body %}{% endblock %}
-	</body>
-	<script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
-</html>
+		<div class="container" style="margin-top:70px"> {% block body %}{% endblock %}
+			</div>
+		</body>
+		<script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+	</html>

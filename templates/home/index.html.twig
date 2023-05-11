@@ -1,8 +1,34 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!
+{% block title %}
+	Accueil
 {% endblock %}
 
 {% block body %}
-	<h1>Page d'accueil</h1>
+	<div class="jumbotron alert alert-secondary">
+		<h1 class="display-4">Bienvenue</h1>
+		<p class="lead">Lucas, Nous sommes le Jeudi 11 mai 2023</p>
+	</div>
+	<hr>
+	<div class="row">
+		<div class="col">
+			<div class="card">
+				<h5 class="card-header">Statistiques</h5>
+				<div class="card-body">
+					<a href="#" class="btn btn-primary">Eleves</a>
+					<a href="#" class="btn btn-primary">Profs</a>
+					<a href="#" class="btn btn-primary">Cours</a>
+				</div>
+			</div>
+		</div>
+		<div class="col">
+			<div class="card">
+				<h5 class="card-header">Cours</h5>
+				<div class="card-body">
+					<a href="#" class="btn btn-primary">Fiches des seances</a>
+					<a href="#" class="btn btn-primary">Calendrier des seances</a>
+				</div>
+			</div>
+		</div>
+	</div>
 {% endblock %}
