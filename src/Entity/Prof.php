@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ProfRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ProfRepository::class)]
@@ -24,6 +26,14 @@ class Prof
 
     #[ORM\Column(length: 255)]
     private ?string $photo = null;
+
+    #[ORM\OneToMany(mappedBy: 'prof', targetEntity: Cour::class, orphanRemoval: true)]
+    private Collection $cours;
+
+    public function __construct()
+    {
+        $this->cours = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -74,6 +84,36 @@ class Prof
     public function setPhoto(string $photo): self
     {
         $this->photo = $photo;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Cour>
+     */
+    public function getCours(): Collection
+    {
+        return $this->cours;
+    }
+
+    public function addCour(Cour $cour): self
+    {
+        if (!$this->cours->contains($cour)) {
+            $this->cours->add($cour);
+            $cour->setProf($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCour(Cour $cour): self
+    {
+        if ($this->cours->removeElement($cour)) {
+            // set the owning side to null (unless already changed)
+            if ($cour->getProf() === $this) {
+                $cour->setProf(null);
+            }
+        }
 
         return $this;
     }

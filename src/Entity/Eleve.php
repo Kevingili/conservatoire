@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\EleveRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -28,6 +30,14 @@ class Eleve
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $photo = null;
+
+    #[ORM\ManyToMany(targetEntity: Cour::class, mappedBy: 'eleve')]
+    private Collection $cours;
+
+    public function __construct()
+    {
+        $this->cours = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -90,6 +100,33 @@ class Eleve
     public function setPhoto(?string $photo): self
     {
         $this->photo = $photo;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Cour>
+     */
+    public function getCours(): Collection
+    {
+        return $this->cours;
+    }
+
+    public function addCour(Cour $cour): self
+    {
+        if (!$this->cours->contains($cour)) {
+            $this->cours->add($cour);
+            $cour->addEleve($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCour(Cour $cour): self
+    {
+        if ($this->cours->removeElement($cour)) {
+            $cour->removeEleve($this);
+        }
 
         return $this;
     }
