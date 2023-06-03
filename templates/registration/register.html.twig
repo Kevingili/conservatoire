@@ -3,15 +3,30 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
 
+<form class="containterConnexion" method="post">
+    <h1 class="textConnexion">Inscription</h1>
     {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
+    <div class="groupID">
+			<label class="titreConnect" for="inputEmail"></label>
+			{{ form_row(registrationForm.email) }}
+		</div>
+
+
+        <div class="groupMDP">
+			{{ form_row(registrationForm.plainPassword, {
             label: 'Password'
-        }) }}
+        }) }}		
+
+		<input
+		type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+</div>    
+
+
         {{ form_row(registrationForm.agreeTerms) }}
 
-        <button type="submit" class="btn">Register</button>
+        <button type="submit" class="boutonConnexion mt-4">Inscription</button>
+        
     {{ form_end(registrationForm) }}
+    </form>
 {% endblock %}
